@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, TextInput, SafeAreaView, StyleSheet, Image, Alert } from 'react-native';
+import { ScrollView, View, TextInput, SafeAreaView, StyleSheet, Image, Alert, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 const Login = (props) => {
     const [userName, cn] = useState(),
@@ -9,7 +9,7 @@ const Login = (props) => {
     }
     return (
         <View style={styles.middle}>
-            <View  style={styles.loginImg}>
+            <View style={styles.loginImg}>
                 <Image
                     style={styles.tinyLogo}
                     source={require('./assets/image/person.jpg')}
@@ -29,7 +29,9 @@ const Login = (props) => {
                 textContentType="password"
             />
             <View style={styles.submitView}>
-                <Icon onPress={onPress} size={30} name="arrowright" style={styles.submitBtn} />
+                <Pressable onPress={onPress} style={styles.submitPre}>
+                    <Icon size={30} name="arrowright" style={styles.submitBtn} />
+                </Pressable>
             </View>
         </View>
 
@@ -41,14 +43,14 @@ const styles = StyleSheet.create({
     middle: {
         flex: 1,
         padding: 60,
-        paddingTop:100,
+        paddingTop: 100,
         backgroundColor: '#fff'
     },
-    loginImg:{
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        marginBottom:20
+    loginImg: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20
     },
     tinyLogo: {
         width: 100,
@@ -58,8 +60,8 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 20,
-        borderRadius:20,
-        paddingLeft:12
+        borderRadius: 20,
+        paddingLeft: 12
     },
     button: {
         padding: 10,
@@ -67,18 +69,25 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30
     },
-    submitView: {
+    submitView:{
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        width:'100%'
+
+    },
+    submitPre: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 60,
+        height: 60,
+        backgroundColor: '#409EFF',
+        borderRadius: 60
     },
     submitBtn: {
-        backgroundColor: '#409EFF',
-        padding: 10,
         color: '#fff',
-        width: 50,
-        height: 50,
-        borderRadius: 50
+
     }
 });
 
