@@ -7,15 +7,16 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
+import type { Node } from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
   View,
+  StatusBar,
+  Alert
 } from 'react-native';
 
 import {
@@ -27,7 +28,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Login from "./Login";
 
-const Section = ({children, title}): Node => {
+const Section = ({ children, title }): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -57,13 +58,23 @@ const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter
   };
 
   return (
-    <View style={{flex:1}}>
-      <Login></Login>
-    </View>
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={isDarkMode ? '#000' : '#fff'} />
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}>
+        <View style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}>
+          <Login></Login>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+
   );
 };
 
