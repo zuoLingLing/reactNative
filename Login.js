@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, TextInput, SafeAreaView, StyleSheet, Image, Alert, Pressable } from 'react-native';
+import { ScrollView, View, TextInput, TouchableWithoutFeedback, StyleSheet, Image, Alert, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Icons from 'react-native-vector-icons/Entypo';
 const Login = (props) => {
     const [userName, cn] = useState(),
-        [psd, cp] = useState();
+        [psd, cp] = useState(),
+        [isShow, ci] = useState(true);
     const onPress = () => {
         Alert.alert('111')
     }
@@ -20,14 +22,29 @@ const Login = (props) => {
                 onChangeText={text => cn(text)}
                 value={userName}
                 placeholder="请输入用户名"
+                underlineColorAndroid="transparent"
+                inlineImageLeft="user"
             />
-            <TextInput
-                style={styles.inputRent}
-                onChangeText={text => cp(text)}
-                value={psd}
-                placeholder="请输入密码"
-                textContentType="password"
-            />
+            <View style={{backgroundColor: '#ffffff', flexDirection: 'row', justifyContent: 'space-between'}}>
+                <TextInput
+                    style={{alignSelf: 'center',flex: 1}}
+                    onChangeText={text => cp(text)}
+                    value={psd}
+                    placeholder="请输入密码"
+                    textContentType="password"
+                    underlineColorAndroid="transparent"
+                    inlineImageLeft="user"
+                    secureTextEntry={isShow}
+                />
+                <TouchableWithoutFeedback onPress={() => {
+                    ci(!isShow)
+                }}>
+                    {isShow ? (
+                        <Icons name="eye-with-line" size={30} style={{ alignSelf: 'center', marginRight: 10, }} />) :
+                        (<Icons name="eye" size={30} style={{ alignSelf: 'center', marginRight: 10, }} />)
+                    }
+                </TouchableWithoutFeedback>
+            </View>
             <View style={styles.submitView}>
                 <Pressable onPress={onPress} style={styles.submitPre}>
                     <Icon size={30} name="arrowright" style={styles.submitBtn} />
@@ -60,8 +77,7 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 20,
-        borderRadius: 20,
-        paddingLeft: 12
+        borderRadius: 20
     },
     button: {
         padding: 10,
@@ -69,11 +85,11 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30
     },
-    submitView:{
+    submitView: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        width:'100%'
+        width: '100%'
 
     },
     submitPre: {

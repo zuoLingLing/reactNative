@@ -58,7 +58,7 @@ const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter
+    backgroundColor: isDarkMode ? Colors.darker :  Colors.lighter
   };
 
   return (
@@ -66,10 +66,13 @@ const App: () => Node = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={isDarkMode ? '#000' : '#fff'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
+        style={{
+          backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          minHeight:'100%'
+        }}>
         <View style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
+          backgroundColor: isDarkMode ? Colors.black : Colors.white
+        }}>
           <Login></Login>
         </View>
       </ScrollView>
