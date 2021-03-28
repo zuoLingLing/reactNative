@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, TextInput, TouchableWithoutFeedback, StyleSheet, Image, Alert, Pressable } from 'react-native';
+import { StyleSheet, Image, Alert, Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icons from 'react-native-vector-icons/Entypo';
-const Login = (props) => {
+import Input from './components/Input/index.js';
+const Login = ({navigation}) => {
+    console.log(123);
     const [userName, cn] = useState(),
-        [psd, cp] = useState(),
-        [isShow, ci] = useState(true);
+        [psd, cp] = useState();
     const onPress = () => {
-        Alert.alert('111')
+        navigation.navigate('Home')
     }
     return (
         <View style={styles.middle}>
@@ -17,43 +18,48 @@ const Login = (props) => {
                     source={require('./assets/image/person.jpg')}
                 />
             </View>
-            <TextInput
-                style={styles.inputRent}
-                onChangeText={text => cn(text)}
+            <Input
+                title='用户名'
+                leftImg='user'
+                isClear={true}
                 value={userName}
-                placeholder="请输入用户名"
-                underlineColorAndroid="transparent"
-                inlineImageLeft="user"
-            />
-            <View style={{backgroundColor: '#ffffff', flexDirection: 'row', justifyContent: 'space-between'}}>
-                <TextInput
-                    style={{alignSelf: 'center',flex: 1}}
-                    onChangeText={text => cp(text)}
-                    value={psd}
-                    placeholder="请输入密码"
-                    textContentType="password"
-                    underlineColorAndroid="transparent"
-                    inlineImageLeft="user"
-                    secureTextEntry={isShow}
-                />
-                <TouchableWithoutFeedback onPress={() => {
-                    ci(!isShow)
-                }}>
-                    {isShow ? (
-                        <Icons name="eye-with-line" size={30} style={{ alignSelf: 'center', marginRight: 10, }} />) :
-                        (<Icons name="eye" size={30} style={{ alignSelf: 'center', marginRight: 10, }} />)
+                onChangeText={(text) => {
+                    cn(text)
+                }}
+                inlineImagePadding={15}
+                ViewStyle={
+                    {
+                        borderWidth: 1,
+                        borderRadius: 20,
+                        marginBottom: 20
                     }
-                </TouchableWithoutFeedback>
-            </View>
+                }
+
+            />
+            <Input
+                title={'密码'}
+                type={'password'}
+                leftImg={'password'}
+                isClear={true}
+                value={psd}
+                onChangeText={(text) => {
+                    cp(text)
+                }}
+                inlineImagePadding={18}
+                ViewStyle={
+                    {
+                        borderWidth: 1,
+                        borderRadius: 20,
+                        marginBottom: 20
+                    }
+                }
+            />
             <View style={styles.submitView}>
                 <Pressable onPress={onPress} style={styles.submitPre}>
                     <Icon size={30} name="arrowright" style={styles.submitBtn} />
                 </Pressable>
             </View>
         </View>
-
-
-
     )
 }
 const styles = StyleSheet.create({
@@ -74,7 +80,6 @@ const styles = StyleSheet.create({
         height: 100
     },
     inputRent: {
-        borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 20,
         borderRadius: 20

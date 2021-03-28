@@ -27,6 +27,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Login from "./Login";
+import Home from "./Home";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Section = ({ children, title }): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -54,30 +57,46 @@ const Section = ({ children, title }): Node => {
   );
 };
 
+const Stack = createStackNavigator();
+
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker :  Colors.lighter
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter
   };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
+{/**
+      <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={isDarkMode ? '#000' : '#fff'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={{
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          minHeight:'100%'
+          minHeight: '100%'
         }}>
         <View style={{
           backgroundColor: isDarkMode ? Colors.black : Colors.white
         }}>
-          <Login></Login>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Login">
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Home" component={Home} />
+            </Stack.Navigator>
+          </NavigationContainer>
         </View>
       </ScrollView>
     </SafeAreaView>
+    
+    
+    */}
+  return (
 
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
