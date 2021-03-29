@@ -65,7 +65,7 @@ const App: () => Node = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter
   };
-{/**
+  {/**
       <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={isDarkMode ? '#000' : '#fff'} />
       <ScrollView
@@ -92,8 +92,27 @@ const App: () => Node = () => {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
+      <Stack.Navigator headerMode="screen"
+        screenOptions={{                 //用来定制头部信息、根据自己需要更改
+
+          headerStyle: {
+            backgroundColor: '#ee7530'
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 14
+          }
+        }}
+      >
+        <Stack.Screen name="Login" component={Login}
+          options={{
+            title: '',
+            headerStyle: {
+              backgroundColor: '#fff'
+            }
+          }}
+        />
         <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -4,8 +4,9 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icons from 'react-native-vector-icons/Entypo';
 
 const Input = (props) => {
-    const { type, leftImg, isClear, value, onChangeText, title, inlineImagePadding, iconSize, multiline, numberOfLines, style, ViewStyle } = props;
-    [isShow, ci] = useState(true);
+    const { type, leftImg, value, onChangeText, title, inlineImagePadding, iconSize, multiline, numberOfLines, style, ViewStyle } = props;
+    const [isShow, ci] = useState(true),
+    [isClear,cis]=useState(false);
     return (
         <View style={{ backgroundColor: '#ffffff', flexDirection: 'row', justifyContent: 'space-between', ...ViewStyle }}>
             <TextInput
@@ -20,6 +21,8 @@ const Input = (props) => {
                 inlineImagePadding={inlineImagePadding ? inlineImagePadding : 15}
                 multiline={multiline ? multiline : false}
                 numberOfLines={numberOfLines ? numberOfLines : 1}
+                onFocus={()=>cis(true)}
+                onBlur={()=>cis(false)}
             />
             {
                 isClear && <TouchableWithoutFeedback onPress={() => {

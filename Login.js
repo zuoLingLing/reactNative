@@ -21,7 +21,6 @@ const Login = ({navigation}) => {
             <Input
                 title='用户名'
                 leftImg='user'
-                isClear={true}
                 value={userName}
                 onChangeText={(text) => {
                     cn(text)
@@ -40,7 +39,6 @@ const Login = ({navigation}) => {
                 title={'密码'}
                 type={'password'}
                 leftImg={'password'}
-                isClear={true}
                 value={psd}
                 onChangeText={(text) => {
                     cp(text)
@@ -66,7 +64,6 @@ const styles = StyleSheet.create({
     middle: {
         flex: 1,
         padding: 60,
-        paddingTop: 100,
         backgroundColor: '#fff'
     },
     loginImg: {
